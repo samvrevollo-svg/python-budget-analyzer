@@ -17,3 +17,5 @@ A beginner-friendly data analytics project using Python and pandas to clean and 
 - Spending by category
 - Average daily spend
 - Bar chart saved as `spending_by_category.png`
+
+![Spending Chart](spending_by_category.png)
