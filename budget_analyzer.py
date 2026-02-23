@@ -1,13 +1,8 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 
-# Sample expense data (you can replace this with your real data later)
-data = {
-    "date": ["2026-02-01", "2026-02-02", "2026-02-03", "2026-02-04", "2026-02-05"],
-    "category": ["Food", "Gas", "Food", "Shopping", "Gas"],
-    "amount": [18.75, 42.10, 12.50, 65.00, 38.40]
-}
-
-df = pd.DataFrame(data)
+# Read expense data from CSV
+df = pd.read_csv("expenses.csv")
 
 # Clean data
 df["date"] = pd.to_datetime(df["date"])
@@ -19,7 +14,7 @@ total_spent = df["amount"].sum()
 # Spending by category
 by_category = df.groupby("category")["amount"].sum().sort_values(ascending=False)
 
-# Average daily spend
+# Daily spending trend
 daily_spend = df.groupby(df["date"].dt.date)["amount"].sum()
 avg_daily = daily_spend.mean()
 
@@ -30,3 +25,15 @@ print("Spending by category:")
 print(by_category)
 
 print(f"\nAverage daily spend: ${avg_daily:.2f}")
+
+# Create a simple bar chart
+plt.figure()
+by_category.plot(kind="bar")
+plt.title("Spending by Category")
+plt.ylabel("Amount ($)")
+plt.xlabel("Category")
+plt.tight_layout()
+
+# Save chart image
+plt.savefig("spending_by_category.png")
+print("\nChart saved as spending_by_category.png")
